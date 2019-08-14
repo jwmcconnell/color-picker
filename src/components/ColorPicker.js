@@ -3,12 +3,16 @@ import PropTypes from 'prop-types';
 import styles from './ColorPicker.css';
 
 export default class ColorPicker extends Component {
+  state = {
+    currentColor: ''
+  }
+
   static propTypes = {
     colors: PropTypes.arrayOf(PropTypes.string).isRequired
   }
 
   colorHandler = color => {
-    console.log(color);
+    this.setState({ color: color });
   }
 
   render() {
@@ -23,9 +27,13 @@ export default class ColorPicker extends Component {
     });
 
     return (
-      <section className={styles.ColorPicker}>
-        {colorElements}
-      </section>
+      <>
+        <section className={styles.ColorPicker}>
+          {colorElements}
+          <div style={{ backgroundColor: this.state.color, padding: '5rem' }}></div>
+        </section>
+        
+      </>
     );
   }
 }
